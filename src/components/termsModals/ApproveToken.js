@@ -7,7 +7,7 @@ import {
 } from "wagmi";
 import config from "../../config/index";
 import { useAccount } from "wagmi";
-import Loader from "../Loader";
+import LineLoader from "../loaders/LineLoader";
 import { ethers } from "ethers";
 
 const ApproveToken = () => {
@@ -25,7 +25,7 @@ const ApproveToken = () => {
     from: address,
     args: [
       config.contract.address,
-      ethers.utils.parseEther(term.maxRenumeration),
+      ethers.utils.parseEther(term?.maxRenumeration),
     ],
   });
 
@@ -38,7 +38,6 @@ const ApproveToken = () => {
   const { isSuccess: isApprovedSuccess, isLoading: isLoadingTx } =
     useWaitForTransaction({
       hash: approveData?.hash,
-      confirmations: 1,
     });
   approveData && console.log(approveData);
 
@@ -52,10 +51,12 @@ const ApproveToken = () => {
   return (
     <div className={`modal bg-indigo-500 w-[90%] lg:max-w-[600px] p-5`}>
       <span className="text-red-500">{isError && error.reason}</span>
-      <div className="flex items-center justify-center">
-        {(isLoadingTx || isFetching || isLoading) && <Loader />}
+      <div className="flex items-center justify-center min-h-[10px]">
+        {(isLoadingTx || isFetching || isLoading) && <LineLoader />}
       </div>
-      <p>You are about to approve {term.maxRenumeration}NRN and your NFT.</p>
+      <h3 className="text-lg font-bold mb-2">
+        You are about to approve {term.maxRenumeration}NRN and your NFT
+      </h3>
       <p>1. Approve your Token</p>
       <p>2. Approve your NFT</p>
 

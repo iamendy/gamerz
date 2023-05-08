@@ -7,7 +7,7 @@ import {
   useWaitForTransaction,
 } from "wagmi";
 import config from "../../config/index";
-import Loader from "../Loader";
+import LineLoader from "../loaders/LineLoader";
 
 const CreateTerm = () => {
   const { address } = useAccount();
@@ -45,7 +45,6 @@ const CreateTerm = () => {
   const { isSuccess: isCreatedSuccess, isLoading: isLoadingTx } =
     useWaitForTransaction({
       hash: termData?.hash,
-      confirmations: 1,
     });
 
   //watching to swith after txn successful
@@ -57,10 +56,10 @@ const CreateTerm = () => {
 
   return (
     <div className="modal bg-indigo-500 w-[90%] lg:max-w-[600px] p-5">
-      <div className="flex items-center justify-center">
-        {(isLoadingTx || isPreparing || isLoading) && <Loader />}
+      <div className="flex items-center justify-center min-h-[10px]">
+        {(isLoadingTx || isFetching || isLoading) && <LineLoader />}
       </div>
-      <p>Awesome! All systems ready</p>
+      <h3 className="text-lg font-bold mb-2">Awesome! All systems ready</h3>
       <p>1. Approve your Token ✅</p>
       <p>2. Approve your NFT ✅</p>
       <p>3. Click on "Create Term"</p>

@@ -2,6 +2,7 @@ import ActiveTerm from "./ActiveTerm";
 import { useContractRead, useAccount } from "wagmi";
 import config from "../config/index";
 import Loader from "./Loader";
+import Link from "next/link";
 
 const ListedTermsWrapper = () => {
   const { address } = useAccount();
@@ -20,7 +21,15 @@ const ListedTermsWrapper = () => {
         ) : listTerms?.length > 0 ? (
           listTerms.map((term, i) => <ActiveTerm key={i} term={term} />)
         ) : (
-          <p className="text-white">You have not created any Term</p>
+          <div>
+            <h1 className="mb-3">Oops! You do not have any listing.</h1>
+            <Link
+              className="bg-indigo-700 px-5 py-2 inline-block "
+              href="/new-term"
+            >
+              Create One
+            </Link>
+          </div>
         )}
       </div>
     </>

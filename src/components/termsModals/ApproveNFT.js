@@ -7,7 +7,7 @@ import {
   useWaitForTransaction,
 } from "wagmi";
 import config from "../../config/index";
-import Loader from "../Loader";
+import LineLoader from "../loaders/LineLoader";
 
 const ApproveNFT = () => {
   const { address } = useAccount();
@@ -23,7 +23,7 @@ const ApproveNFT = () => {
     abi: config.nft.abi,
     functionName: "approve",
     from: address,
-    args: [config.contract.address, 1],
+    args: [config.contract.address, 3],
   });
 
   const {
@@ -35,7 +35,6 @@ const ApproveNFT = () => {
   const { isSuccess: isApprovedSuccess, isLoading: isLoadingTx } =
     useWaitForTransaction({
       hash: approveData?.hash,
-      confirmations: 1,
     });
   approveData && console.log(approveData);
 
@@ -47,10 +46,10 @@ const ApproveNFT = () => {
   }, [isApprovedSuccess]);
   return (
     <div className="modal bg-indigo-500 w-[90%] lg:max-w-[600px] p-5">
-      <div className="flex items-center justify-center">
-        {(isLoadingTx || isFetching || isLoading) && <Loader />}
+      <div className="flex items-center justify-center min-h-[10px]">
+        {(isLoadingTx || isFetching || isLoading) && <LineLoader />}
       </div>
-      <p>Great! Now Approve your NFT</p>
+      <h3 className="text-lg font-bold mb-2">Great! Now Approve your NFT</h3>
       <p>1. Approve your Token ✅</p>
       <p>2. Approve your NFT</p>
       <p>3. Click on "Create Term"</p>

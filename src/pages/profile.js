@@ -1,26 +1,25 @@
 import Layout from "../components/Layout";
-import Link from "next/link";
 import { useState } from "react";
 import ActiveTermsWrapper from "../components/ActiveTermsWrapper";
 import ListedTermsWrapper from "../components/ListedTermsWrapper";
+import { useAccount, useContractRead } from "wagmi";
 const Profile = () => {
-  const [terms, setTerms] = useState([{ owner: "xyz" }]);
   const [tab, setTab] = useState(1);
+  const { address } = useAccount();
+
+  const { data: terms, isFetching } = useContractRead({
+    address: config.token.address,
+    abi: config.token.abi,
+    functionName: "balanceOf",
+    arg,
+  });
+
+  //get amount of tokens && NFT
   return (
     <Layout>
       <div className="wrapper">
-        <div>
-          <h1>Oops! You do not have any listing.</h1>
-          <Link
-            className="bg-indigo-700 px-5 py-2 inline-block "
-            href="/new-term"
-          >
-            Create One
-          </Link>
-        </div>
-
-        <div className="mt-16">
-          <div className="flex inline-block mb-5 space-x-3">
+        <div className="mt-0">
+          <div className="flex mb-5 space-x-3 border-b border-b-indigo-400">
             <h1
               className={`${
                 tab == 1 ? "bg-indigo-400" : ""
@@ -29,6 +28,7 @@ const Profile = () => {
             >
               Active Terms
             </h1>
+
             <h1
               className={`${
                 tab == 2 ? "bg-indigo-400" : ""

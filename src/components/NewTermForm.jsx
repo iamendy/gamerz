@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { NewTermContext } from "../contexts/NewTermContext";
 const NewTermForm = ({ toggle }) => {
-  const { term, updateTerm, updateForm } = useContext(NewTermContext);
+  const { hasFilledForm, updateTerm, nextStep } = useContext(NewTermContext);
 
   return (
     <div className="wrapper">
@@ -43,9 +43,10 @@ const NewTermForm = ({ toggle }) => {
             />
 
             <button
-              className="rounded-md bg-gray-600 px-3.5 py-1.5 text-base font-semibold leading-7 text-white hover:bg-gray-500"
+              className="rounded-md bg-indigo-600 px-3.5 py-1.5 text-base font-semibold leading-7 text-white hover:bg-indigo-800 disabled:bg-gray-500"
+              disabled={!hasFilledForm}
               onClick={() => {
-                updateForm();
+                nextStep();
                 toggle(true);
               }}
             >
