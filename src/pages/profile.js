@@ -2,19 +2,10 @@ import Layout from "../components/Layout";
 import { useState } from "react";
 import ActiveTermsWrapper from "../components/ActiveTermsWrapper";
 import ListedTermsWrapper from "../components/ListedTermsWrapper";
-import { useAccount, useContractRead } from "wagmi";
+
 const Profile = () => {
   const [tab, setTab] = useState(1);
-  const { address } = useAccount();
 
-  const { data: terms, isFetching } = useContractRead({
-    address: config.token.address,
-    abi: config.token.abi,
-    functionName: "balanceOf",
-    arg,
-  });
-
-  //get amount of tokens && NFT
   return (
     <Layout>
       <div className="wrapper">
