@@ -42,11 +42,8 @@ const Approve = () => {
       confirmations: 1,
     });
 
-  approveData && console.log(approveData);
-
   useEffect(() => {
     if (isApprovedSuccess == true) {
-      console.log("tx succss");
       nextStep();
     }
   }, [isApprovedSuccess]);
@@ -54,7 +51,7 @@ const Approve = () => {
   return (
     <div className="flex flex-col space-y-3">
       {isError ||
-        (isWriteError && <p className="text-red-500 p-5">{error.reason}</p>)}
+        (isWriteError && <p className="text-red-500 p-5">{error?.reason}</p>)}
       <p>
         Accepting this game will require you to stake{" "}
         {term.proGamersStake.toString()} NRN

@@ -17,7 +17,7 @@ const Profile = () => {
               } text-xl p-3  cursor-pointer`}
               onClick={() => setTab(1)}
             >
-              Active Terms
+              My Terms
             </h1>
 
             <h1
@@ -26,7 +26,7 @@ const Profile = () => {
               } text-xl p-3  cursor-pointer`}
               onClick={() => setTab(2)}
             >
-              Listed Terms
+              Accepted Terms
             </h1>
           </div>
 

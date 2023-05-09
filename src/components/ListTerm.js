@@ -1,7 +1,8 @@
 import truncateEthAddress from "truncate-eth-address";
 import UserIcon from "./icons/UserIcon";
 import { useCountdown } from "../hooks/useCountdown";
-import CancelListTerm from "./CancelListTerm";
+import CancelListButton from "./CancelListButton";
+import SettleButton from "./SettleButton";
 
 const ActiveTerm = ({ term }) => {
   const { days, hours, minutes, seconds, isCountdownCompleted } = useCountdown(
@@ -34,14 +35,24 @@ const ActiveTerm = ({ term }) => {
         </div>
       )}
 
+      {term.reqStatus == 4 && (
+        <div className="absolute w-full h-[12px] top-0 left-0 bg-green-500 rounded-md flex justify-center items-center">
+          <span className="text-xs">Completed</span>
+        </div>
+      )}
+
       <div className="flex items-center space-x-3">
         <UserIcon />
 
         <span>{truncateEthAddress(term.proGamer)}</span>
+
+        <div className="bg-indigo-500 rounded-full w-5 h-5 flex items-center justify-center text-xs">
+          {parseInt(term.termId)}
+        </div>
       </div>
       <div className="mt-3">
         <p className="text-lg font-medium text-gray-500 dark:text-gray-200">
-          Current Score: {term.currentEloScore.toString()} ELO
+          Starting Score: {term.currentEloScore.toString()} ELO
         </p>
         <p className="mt-4 text-black dark:text-white">
           Price Per ELO: {term.pricePerElo.toString()} NRN
@@ -51,18 +62,27 @@ const ActiveTerm = ({ term }) => {
           Stake: {term.proGamersStake.toString()} NRN
         </p>
 
+        <p className="mt-4 text-black dark:text-white">
+          Final ELO:{" "}
+          {term.reqStatus == 3 ? term.endingEloScore.toString() : "Ongoing"} ELO
+        </p>
+
         <div className="flex mt-4 text-black dark:text-white">
-          {isCountdownCompleted && term.reqStatus == 3 ? (
-            <button className="mt-2 inline-flex items-center justify-center rounded-md bg-indigo-600 px-10 py-4 font-semibold text-white group-hover:bg-black">
-              Settle
-            </button>
+          {isCountdownCompleted && term.reqStatus == 4 ? (
+            <SettleButton term={term} />
           ) : term.reqStatus == 0 ? (
-            <CancelListTerm term={term} />
-          ) : (
+            <CancelListButton term={term} />
+          ) : term.reqStatus == 1 ? (
+            <>cancelled</>
+          ) : term.reqStatus == 2 ? (
             <div className="flex space-x-2">
               Ends in:{" "}
               <p> {days + ":" + hours + ":" + minutes + ":" + seconds}</p>
             </div>
+          ) : (
+            <button className="mt-2 inline-flex items-center justify-center rounded-md px-10 py-4 font-semibold text-white bg-gray-500">
+              Settled
+            </button>
           )}
         </div>
       </div>

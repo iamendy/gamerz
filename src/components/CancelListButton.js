@@ -6,7 +6,8 @@ import {
 import config from "../config";
 import { useState } from "react";
 import { useRouter } from "next/router";
-const CancelListTerm = ({ term }) => {
+
+const CancelListButton = ({ term }) => {
   const [toggle, setToggle] = useState(false);
   const router = useRouter();
   const {
@@ -26,7 +27,7 @@ const CancelListTerm = ({ term }) => {
     write: cancel,
     isLoading,
   } = useContractWrite({
-    config: Cancelconfig,
+    ...Cancelconfig,
     onSuccess() {
       router.push("/profile");
     },
@@ -66,4 +67,4 @@ const CancelListTerm = ({ term }) => {
     </div>
   );
 };
-export default CancelListTerm;
+export default CancelListButton;

@@ -47,7 +47,7 @@ const Accept = () => {
 
   return (
     <div className="flex flex-col space-y-3 text-center">
-      {isAcceptError && <p className="text-red-500"> {acceptError.reason} </p>}
+      {isAcceptError && <p className="text-red-500"> {acceptError?.reason} </p>}
 
       <p>Great! Now you can stake</p>
       {(isLoadingAcceptTx || isWritingAccept || isFetchingAccept) && <Loader />}
