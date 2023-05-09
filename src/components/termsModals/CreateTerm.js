@@ -11,7 +11,7 @@ import LineLoader from "../loaders/LineLoader";
 
 const CreateTerm = () => {
   const { address } = useAccount();
-  const { nextStep, term, step } = useContext(NewTermContext);
+  const { nextStep, term, nft, step } = useContext(NewTermContext);
 
   const {
     config: termConfig,
@@ -30,8 +30,8 @@ const CreateTerm = () => {
       term.maxRenumeration,
       term.proGamerStake,
       0, //serviceToken USDC
-      1,
-      1300,
+      nft.tokenId,
+      1300, //current ELO score
       [],
     ],
   });
@@ -40,6 +40,8 @@ const CreateTerm = () => {
     data: termData,
     write: createTerm,
     isLoading,
+    isError: isWriteError,
+    error: writeError,
   } = useContractWrite(termConfig);
 
   const { isSuccess: isCreatedSuccess, isLoading: isLoadingTx } =
@@ -59,6 +61,12 @@ const CreateTerm = () => {
       <div className="flex items-center justify-center min-h-[10px]">
         {(isLoadingTx || isFetching || isLoading) && <LineLoader />}
       </div>
+      {isError ||
+        (isWriteError && (
+          <span className="text-red text-xs">
+            {error.reason || writeError.reason}
+          </span>
+        ))}
       <h3 className="text-lg font-bold mb-2">Awesome! All systems ready</h3>
       <p>1. Approve your Token ✅</p>
       <p>2. Approve your NFT ✅</p>

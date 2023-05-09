@@ -1,7 +1,7 @@
 import { Network, Alchemy } from "alchemy-sdk";
 
 const settings = {
-  apiKey: "W8mozDNOLkCr78f9GEO9nP2_wVzaS7wq",
+  apiKey: process.env.API_KEY,
   network: Network.ETH_SEPOLIA,
 };
 const alchemy = new Alchemy(settings);

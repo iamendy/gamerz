@@ -12,7 +12,7 @@ import { ethers } from "ethers";
 
 const ApproveToken = () => {
   const { address } = useAccount();
-  const { nextStep, term } = useContext(NewTermContext);
+  const { nextStep, term, nft } = useContext(NewTermContext);
   const {
     config: approveConfig,
     isError,
@@ -33,6 +33,8 @@ const ApproveToken = () => {
     data: approveData,
     write: approve,
     isLoading,
+    isError: isWriteError,
+    error: writeError,
   } = useContractWrite(approveConfig);
 
   const { isSuccess: isApprovedSuccess, isLoading: isLoadingTx } =
@@ -54,10 +56,17 @@ const ApproveToken = () => {
       <div className="flex items-center justify-center min-h-[10px]">
         {(isLoadingTx || isFetching || isLoading) && <LineLoader />}
       </div>
+      {isError ||
+        (isWriteError && (
+          <span className="text-red text-xs">
+            {error.reason || writeError.reason}
+          </span>
+        ))}
       <h3 className="text-lg font-bold mb-2">
-        You are about to approve {term.maxRenumeration}NRN and your NFT
+        You are about to approve {term.maxRenumeration}NRN and{" "}
+        {nft.contract.name} #{nft.tokenId}
       </h3>
-      <p>1. Approve your Token</p>
+      <p>1. Approve your Tokens</p>
       <p>2. Approve your NFT</p>
 
       <br />

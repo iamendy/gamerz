@@ -1,19 +1,17 @@
 import Layout from "../components/Layout";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import NewTermModal from "../components/NewTermModal";
 import NewTermProvider from "../contexts/NewTermContext";
 import NewTermForm from "../components/NewTermForm";
-import { useAccount } from "wagmi";
 import useAlchemy from "../hooks/useAlchemy";
 import Loader from "../components/Loader";
+import { ethers } from "ethers";
+import Link from "next/link";
 
 const NewTerm = () => {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = (st) => setIsOpen(st);
   const { tokenBalance, NFTs, isLoading } = useAlchemy();
-
-  //get amount of tokens && NFT
-  NFTs && console.log(NFTs);
 
   return (
     <Layout>
@@ -24,11 +22,25 @@ const NewTerm = () => {
           <div className="relative">
             <NewTermModal isOpen={isOpen} toggle={toggle} />
 
-            <NewTermForm toggle={toggle} />
+            <NewTermForm
+              toggle={toggle}
+              nfts={NFTs}
+              tokenBalance={tokenBalance}
+            />
           </div>
         </NewTermProvider>
       ) : (
-        <p> Not Eligible</p>
+        <div className="min-h-1/2 flex flex-col items-center justify-center p-10">
+          <p>
+            Your token balance is: {ethers.utils.formatEther(`${tokenBalance}`)}{" "}
+            NRN
+          </p>
+          <p>Not Eligible. You need an NFT to create a listing.</p>
+
+          <div className="bg-indigo-500 px-5 py-3 rounded-md mt-5 hover:bg-indigo-700">
+            <Link href="/">View Marketplace</Link>
+          </div>
+        </div>
       )}
     </Layout>
   );

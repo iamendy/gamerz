@@ -2,8 +2,11 @@ import UserIcon from "../components/icons/UserIcon";
 import { useContext } from "react";
 import { AcceptTermContext } from "../contexts/AcceptTermContext";
 import truncateEthAddress from "truncate-eth-address";
+import { useAccount } from "wagmi";
+
 const Term = ({ toggle, term }) => {
   const { nextStep, updateSelectedTerm } = useContext(AcceptTermContext);
+  const { address } = useAccount();
 
   return (
     <div className=" rounded-md border-2 cursor-pointer hover:border-indigo-700 border-indigo-800 group hover:shadow hover:bg-indigo-600">
@@ -29,19 +32,21 @@ const Term = ({ toggle, term }) => {
           </p>
         </div>
         <div>
-          <a
-            href="#"
-            title=""
-            className="inline-flex items-center justify-center rounded-md bg-indigo-600 px-10 py-4 font-semibold text-white group-hover:bg-black"
-            role="button"
-            onClick={() => {
-              toggle(true);
-              updateSelectedTerm(term);
-              nextStep();
-            }}
-          >
-            Accept
-          </a>
+          {term.casualGamer !== address && (
+            <a
+              href="#"
+              title=""
+              className="inline-flex items-center justify-center rounded-md bg-indigo-600 px-10 py-4 font-semibold text-white group-hover:bg-black"
+              role="button"
+              onClick={() => {
+                toggle(true);
+                updateSelectedTerm(term);
+                nextStep();
+              }}
+            >
+              Accept
+            </a>
+          )}
         </div>
       </div>
     </div>

@@ -23,13 +23,15 @@ const ApproveNFT = () => {
     abi: config.nft.abi,
     functionName: "approve",
     from: address,
-    args: [config.contract.address, 3],
+    args: [config.contract.address, parseInt(term.selectedTokenId)],
   });
 
   const {
     data: approveData,
     write: approve,
     isLoading,
+    isError: isWriteError,
+    error: writeError,
   } = useContractWrite(approveConfig);
 
   const { isSuccess: isApprovedSuccess, isLoading: isLoadingTx } =
@@ -49,6 +51,13 @@ const ApproveNFT = () => {
       <div className="flex items-center justify-center min-h-[10px]">
         {(isLoadingTx || isFetching || isLoading) && <LineLoader />}
       </div>
+      {isError ||
+        (isWriteError && (
+          <span className="text-red text-xs">
+            {error.reason || writeError.reason}
+          </span>
+        ))}
+
       <h3 className="text-lg font-bold mb-2">Great! Now Approve your NFT</h3>
       <p>1. Approve your Token ✅</p>
       <p>2. Approve your NFT</p>
