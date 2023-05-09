@@ -1,4 +1,4 @@
-import ActiveTerm from "./ActiveTerm";
+import ListTerm from "./ListTerm";
 import { useContractRead, useAccount } from "wagmi";
 import config from "../config/index";
 import Loader from "./Loader";
@@ -19,7 +19,7 @@ const ListedTermsWrapper = () => {
         {isFetching ? (
           <Loader />
         ) : listTerms?.length > 0 ? (
-          listTerms.map((term, i) => <ActiveTerm key={i} term={term} />)
+          listTerms.map((term, i) => <ListTerm key={i} term={term} />)
         ) : (
           <div>
             <h1 className="mb-3">Oops! You do not have any listing.</h1>

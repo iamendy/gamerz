@@ -13,6 +13,7 @@
     "@dicebear/core": "^6.0.3",
     "@rainbow-me/rainbowkit": "~0.12.1",
     "alchemy-sdk": "^2.8.2",
+    "dayjs": "^1.11.7",
     "ethers": "^5.7.0",
     "next": "^13.0.0",
     "react": "^18.2.0",
