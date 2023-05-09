@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from "react";
 import { useAccount } from "wagmi";
 import config from "../config";
 import alchemy from "../lib/alchemy";
-
+import { ethers } from "ethers";
 const useAlchemy = () => {
   const { address } = useAccount();
   const [isLoading, setIsLoading] = useState(true);
@@ -16,9 +16,11 @@ const useAlchemy = () => {
       ]);
       const nft = await alchemy.nft.getNftsForOwner(`${address}`);
 
-      setTokenBalance(parseInt(token.tokenBalances[0].tokenBalance));
+      setTokenBalance(
+        ethers.utils.formatEther(token?.tokenBalances[0].tokenBalance)
+      );
       setNFTs(
-        nft.ownedNfts.filter(
+        nft?.ownedNfts?.filter(
           (n) =>
             n.contract.address.toLocaleLowerCase() ===
             config.nft.address.toLocaleLowerCase()

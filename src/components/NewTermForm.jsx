@@ -13,9 +13,7 @@ const NewTermForm = ({ toggle, nfts, tokenBalance }) => {
         <div className="mt-6">
           <div className="flex space-x-5">
             <p className="mb-3 text-sm">Current ELO: 2300</p>
-            <p className="mb-3 text-sm">
-              Current Balance: {ethers.utils.formatEther(`${tokenBalance}`)}
-            </p>
+            <p className="mb-3 text-sm">Current Balance: {tokenBalance} NRN</p>
           </div>
 
           <div className="flex space-x-5 items-center my-5">

@@ -59,7 +59,8 @@ const ActiveTerm = ({ term }) => {
             </button>
           ) : (
             <div className="flex space-x-2">
-              Ends in: <p> {days + ":" + hours + ":" + minutes + ""}</p>
+              Ends in:{" "}
+              <p> {days + ":" + hours + ":" + minutes + ":" + seconds}</p>
             </div>
           )}
         </div>

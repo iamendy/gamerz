@@ -32,7 +32,7 @@ const NewTerm = () => {
       ) : (
         <div className="min-h-1/2 flex flex-col items-center justify-center p-10">
           <p>
-            Your token balance is: {ethers.utils.formatEther(`${tokenBalance}`)}{" "}
+            Your token balance is: {tokenBalance}
             NRN
           </p>
           <p>Not Eligible. You need an NFT to create a listing.</p>

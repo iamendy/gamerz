@@ -9,8 +9,10 @@ const ListedTermsWrapper = () => {
   const { data: terms, isFetching } = useContractRead({
     address: config.contract.address,
     abi: config.contract.abi,
+    from: address,
     functionName: "getTerms",
   });
+
   const listTerms = terms?.filter((term) => term.casualGamer == address);
   return (
     <>

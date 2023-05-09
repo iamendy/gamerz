@@ -12,7 +12,7 @@ import Loader from "../Loader";
 const Accept = () => {
   const { address } = useAccount();
   const { term, nextStep } = useContext(AcceptTermContext);
-  console.log(parseInt(term.termId));
+
   const {
     config: acceptConfig,
     isError: isAcceptError,
@@ -23,7 +23,7 @@ const Accept = () => {
     abi: config.contract.abi,
     functionName: "acceptRequirements",
     from: address,
-    args: [parseInt(term.termId - 1)],
+    args: [parseInt(term.termId)],
   });
 
   const {

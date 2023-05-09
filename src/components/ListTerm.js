@@ -1,26 +1,12 @@
 import truncateEthAddress from "truncate-eth-address";
 import UserIcon from "./icons/UserIcon";
-import {
-  usePrepareContractWrite,
-  useContractWrite,
-  useWaitForTransaction,
-  useAccount,
-} from "wagmi";
-import config from "../config";
 import { useCountdown } from "../hooks/useCountdown";
+import CancelListTerm from "./CancelListTerm";
 
 const ActiveTerm = ({ term }) => {
-  const { address } = useAccount();
   const { days, hours, minutes, seconds, isCountdownCompleted } = useCountdown(
     parseInt(term.duration) + parseInt(term.timeAccepted)
   );
-
-  const { isFetching, isError, error } = usePrepareContractWrite({
-    address: config.contract.address,
-    abi: config.contract.abi,
-    functionName: "cancelRequirement",
-    args: [term.termId],
-  });
 
   return (
     <div className="relative p-3 rounded-md border-2 cursor-pointer hover:border-indigo-700 border-indigo-800 group hover:shadow hover:bg-indigo-600">
@@ -39,6 +25,12 @@ const ActiveTerm = ({ term }) => {
       {term.reqStatus == 0 && (
         <div className="absolute w-full h-[12px] top-0 left-0 bg-indigo-500 rounded-md flex justify-center items-center">
           <span className="text-xs">Awaiting</span>
+        </div>
+      )}
+
+      {term.reqStatus == 1 && (
+        <div className="absolute w-full h-[12px] top-0 left-0 bg-red-500 rounded-md flex justify-center items-center">
+          <span className="text-xs">Cancelled</span>
         </div>
       )}
 
@@ -65,12 +57,11 @@ const ActiveTerm = ({ term }) => {
               Settle
             </button>
           ) : term.reqStatus == 0 ? (
-            <button className="mt-2 inline-flex items-center justify-center rounded-md bg-indigo-600 px-10 py-4 font-semibold text-white group-hover:bg-black">
-              Cancel
-            </button>
+            <CancelListTerm term={term} />
           ) : (
             <div className="flex space-x-2">
-              Ends in: <p> {days + ":" + hours + ":" + minutes + ""}</p>
+              Ends in:{" "}
+              <p> {days + ":" + hours + ":" + minutes + ":" + seconds}</p>
             </div>
           )}
         </div>
