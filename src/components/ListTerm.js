@@ -45,26 +45,25 @@ const ActiveTerm = ({ term }) => {
         <UserIcon />
 
         <span>{truncateEthAddress(term.proGamer)}</span>
-
-        <div className="bg-indigo-500 rounded-full w-5 h-5 flex items-center justify-center text-xs">
-          {parseInt(term.termId)}
-        </div>
       </div>
       <div className="mt-3">
         <p className="text-lg font-medium text-gray-500 dark:text-gray-200">
           Starting Score: {term.currentEloScore.toString()} ELO
         </p>
+
         <p className="mt-4 text-black dark:text-white">
           Price Per ELO: {term.pricePerElo.toString()} NRN
         </p>
 
         <p className="mt-4 text-black dark:text-white">
-          Stake: {term.proGamersStake.toString()} NRN
+          ProGamer Stake: {term.proGamersStake.toString()} NRN
         </p>
 
         <p className="mt-4 text-black dark:text-white">
-          Final ELO:{" "}
-          {term.reqStatus == 3 ? term.endingEloScore.toString() : "Ongoing"} ELO
+          Final ELO:
+          {term.reqStatus == 3 || term.reqStatus == 4
+            ? term.endingEloScore.toString() + " ELO"
+            : "Ongoing"}
         </p>
 
         <div className="flex mt-4 text-black dark:text-white">

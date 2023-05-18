@@ -10,6 +10,7 @@ const ListedTermsWrapper = () => {
     address: config.contract.address,
     abi: config.contract.abi,
     from: address,
+    watch: true,
     functionName: "getTerms",
   });
 

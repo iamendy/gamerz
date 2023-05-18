@@ -38,7 +38,6 @@ const ApproveNFT = () => {
     useWaitForTransaction({
       hash: approveData?.hash,
     });
-  approveData && console.log(approveData);
 
   //watching to swith after txn successful
   useEffect(() => {

@@ -11,7 +11,7 @@ const ActiveTermsWrapper = () => {
     abi: config.contract.abi,
     functionName: "getTerms",
   });
-  terms && console.log(terms);
+
   return (
     <>
       <h3 className="mb-4 font-bold">The Terms you accept show up here</h3>
