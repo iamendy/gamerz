@@ -7,6 +7,7 @@ import config from "../config";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import { useAccount } from "wagmi";
+import Loader from "./Loader";
 
 const SettleButton = ({ term }) => {
   const { address } = useAccount();

@@ -1,6 +1,6 @@
 const config = {
   contract: {
-    address: "0xE24608d8E4BFacd8567c331c89D8ae1F64cCb814",
+    address: "0xC342F1fbD04449Af632Fb1bed8b432a13727Aa91",
     abi: [
       {
         inputs: [
@@ -584,7 +584,7 @@ const config = {
     ],
   },
   token: {
-    address: "0x0a9A581EB48a804Abaed9873DC0c127E1347cD1F",
+    address: "0x91A779a373540658206FA930A36d2AFfd24149C9",
     abi: [
       {
         inputs: [],
@@ -935,7 +935,7 @@ const config = {
   },
 
   nft: {
-    address: "0x7726C67a61F602eb5746B73D1373687030B85c97",
+    address: "0xda2Be1B00AC3094CE034d1DB9aB424c24488648e",
     abi: [
       {
         inputs: [],
