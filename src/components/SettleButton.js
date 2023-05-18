@@ -37,10 +37,14 @@ const SettleButton = ({ term }) => {
     },
   });
 
-  const { isSuccess: isSuccessAccept, isLoading: isLoadingAcceptTx } =
-    useWaitForTransaction({
-      hash: data?.hash,
-    });
+  const handleSettle = () => {
+    setToggle(false);
+  };
+
+  const { isLoading: isLoadingAcceptTx } = useWaitForTransaction({
+    hash: data?.hash,
+    onSuccess: () => router.push("/profile"),
+  });
 
   return (
     <div>
@@ -52,10 +56,10 @@ const SettleButton = ({ term }) => {
         <p>Are you Sure?</p>
         <button
           className="px-3 py-1 my-3 rounded-lg bg-indigo-600 disabled:bg-gray-500"
-          disabled={isLoading}
+          disabled={isLoading || isLoadingAcceptTx}
           onClick={() => settle?.()}
         >
-          Yes
+          {isLoading || isLoadingAcceptTx ? "Processing" : "Yes"}
         </button>
 
         <span onClick={() => setToggle(false)} className="p-2">

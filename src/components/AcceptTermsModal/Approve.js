@@ -53,7 +53,7 @@ const Approve = () => {
       {isError ||
         (isWriteError && <p className="text-red-500 p-5">{error?.reason}</p>)}
       <p>
-        Accepting this game will require you to stake{" "}
+        Accepting this term will require you to stake{" "}
         {term.proGamersStake.toString()} NRN
       </p>
       {(isLoadingTx || isLoading || isFetching) && <Loader />}

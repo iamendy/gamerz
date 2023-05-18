@@ -13,7 +13,6 @@ const NewTermForm = ({ toggle, nfts, tokenBalance }) => {
         <div className="mt-6">
           <div className="flex space-x-5">
             <p className="mb-3 text-sm">Current ELO: 2300</p>
-            <p className="mb-3 text-sm">Current Balance: {tokenBalance} NRN</p>
           </div>
 
           <div className="flex space-x-5 items-center my-5">
@@ -21,13 +20,18 @@ const NewTermForm = ({ toggle, nfts, tokenBalance }) => {
               <div
                 onClick={() => captureNFT(nft)}
                 key={i}
-                className={`px-5 py-3 ${
+                className={`px-5 py-3 w-36 h-24 ${
                   term.selectedTokenId == nft.tokenId
                     ? "bg-indigo-400"
                     : "bg-gray-700"
                 } rounded-lg cursor-pointer`}
               >
-                {nft.contract.name} #{nft.tokenId}
+                <div>
+                  <img src="/img/mint.png" alt="mint-pass" />
+                </div>
+                <span className="inline-block text-xs text-center w-full">
+                  {nft.contract.name} #{nft.tokenId}
+                </span>
               </div>
             ))}
           </div>
