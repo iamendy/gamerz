@@ -60,7 +60,9 @@ const ApproveNFT = () => {
       <h3 className="text-lg font-bold mb-2">Great! Now Approve your NFT</h3>
       <p>1. Approve your Token ✅</p>
       <p>2. Approve your NFT</p>
-      <p>3. Click on "Create Term"</p>
+      <p>
+        3. Click on <b>Create Term</b>
+      </p>
 
       <br />
       <button
